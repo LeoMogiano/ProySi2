@@ -110,14 +110,12 @@ class medicoController extends Controller
     {
         
         $medico=medico::findOrFail($id);
-        
         $medico->nombre=$request->input('nombre');
         $medico->edad=$request->input('edad');
         $medico->sexo=$request->input('sexo');
         $medico->direccion=$request->input('direccion');
         $medico->telefono=$request->input('telefono');
         $medico->estado=$request->input('estado');
-
         $medico->save();
 
         return redirect()->route('medicos.index');

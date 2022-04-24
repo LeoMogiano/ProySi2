@@ -276,7 +276,7 @@ return [
         ],
         [
             'text' => 'Pacientes',
-            'route'  => 'users.index',
+            'route'  => 'pacientes.index',
             'icon' => 'fas fa-hospital-user',
         ],
         [
