@@ -250,12 +250,14 @@ return [
         ],
         
         ['header' => 'OPCIONES'],
-        [
+        /* [
             'text' => 'profile',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
             'can'       =>  'Gestionar Perfil'
-        ],
+        ], */
+
+        
         [
             'text' => 'Usuarios',
             'route'  => 'users.index',
@@ -265,7 +267,17 @@ return [
         [
             'text' => 'Roles',
             'route'  => 'roles.index',
-            'icon' => 'fas fa-fw fa-lock',
+            'icon' => 'fas fa-ruler',
+        ],
+        [
+            'text' => 'Medicos',
+            'route'  => 'medicos.index',
+            'icon' => 'fas fa-book-medical',
+        ],
+        [
+            'text' => 'Pacientes',
+            'route'  => 'users.index',
+            'icon' => 'fas fa-hospital-user',
         ],
         [
             'text'    => 'multilevel',

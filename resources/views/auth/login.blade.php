@@ -1,4 +1,47 @@
-@extends('layouts.app')
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="{{ asset('img/logo.jpg') }}"" type="image/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/styleLogin.css') }}">
+    <title>Bienvenido a PROSALUD+</title>
+</head>
+
+<body>
+	<section class="login">
+		<div class="login_box">
+			<div class="left">
+				
+				<div class="contact">
+					<form method="POST" action="{{ route('login') }}">
+                        @csrf
+						<h3>INICIA SESIÓN</h3>
+						<input type="email" name="email" placeholder="CORREO">
+						<input type="password" name="password" placeholder="CONTRASEÑA">
+						<button class="submit">INGRESAR</button>
+					</form>
+				</div>
+			</div>
+			<div class="right">
+				<div class="right-text">
+					<h2>PROSALUD+</h2>
+					<h5>LA SALUD ES PARA TODOS  !</h5>
+				</div>
+				<div class="right-inductor"><img src="{{ asset('img/logoProsalud.jpg') }}" alt=""></div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
+
+
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -71,3 +114,4 @@
     </div>
 </div>
 @endsection
+ --}}
