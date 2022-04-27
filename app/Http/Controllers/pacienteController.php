@@ -102,6 +102,10 @@ class pacienteController extends Controller
         $paciente->estado = $request->input('estado');
         $paciente->save();
 
+        $user = User::where('cod_p',$paciente->id)->first();
+        $user->name = $paciente->nombre;
+        $user->save();
+
         return redirect()->route('pacientes.index');
     }
 

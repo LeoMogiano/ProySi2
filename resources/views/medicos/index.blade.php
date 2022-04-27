@@ -44,7 +44,7 @@
                     <td>{{$medico->direccion}}</td>
                     <td>{{$medico->telefono}}</td>
                     
-                    @if ($medico->estado = 0)
+                    @if ($medico->estado == 0)
                     <td>Inactivo</td>
                     @else
                     <td>Activo</td>

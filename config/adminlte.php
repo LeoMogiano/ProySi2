@@ -280,6 +280,11 @@ return [
             'icon' => 'fas fa-hospital-user',
         ],
         [
+            'text' => 'Citas Medicas',
+            'route'  => 'citas.index',
+            'icon' => 'fas fa-hospital-user',
+        ],
+        [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [

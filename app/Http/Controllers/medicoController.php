@@ -118,6 +118,10 @@ class medicoController extends Controller
         $medico->estado=$request->input('estado');
         $medico->save();
 
+        $user = User::where('cod_p',$medico->id)->first();
+        $user->name = $medico->nombre;
+        $user->save();
+
         return redirect()->route('medicos.index');
 
     }
