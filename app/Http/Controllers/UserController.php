@@ -78,13 +78,13 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
+        $roles = Role::all();
         $user = User::find($id);
         $rol = DB::table('model_has_roles')->where('model_id', $user->id)->first();
         $rol_name = DB::table('roles')->where('id', $rol->role_id)->first();
         return view('users.edit', compact('user', 'roles', 'rol', 'rol_name'));
-        return view('users.edit', compact('user', 'empleados', 'roles', 'rol', 'rol_name', 'empleado', 'e'));
-        return view('users.edit', compact('user'));
+
     }
 
     /**
