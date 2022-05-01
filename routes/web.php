@@ -35,3 +35,5 @@ Route::post('medicos/esp_store', [medicoController::class, 'esp_store']);
 Route::resource('pacientes', pacienteController::class)->names('pacientes');
 Route::resource('citas', citaController::class)->names('citas');
 Route::resource('historias', HistoriaController::class)->names('historias');
+Route::get('citas/diagnostico/{id}', [citaController::class, 'diagnostico']);
+Route::post('citas/diag_store/{id}', [citaController::class, 'diag_store']);

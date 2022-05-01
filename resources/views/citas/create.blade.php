@@ -12,6 +12,7 @@
 
             <form action="{{ route('citas.store') }}" method="post">
                 @csrf
+   
 
                 <div class="row">
                     <div class="col-md-6">
@@ -50,6 +51,8 @@
                     </div>
                 </div>
 
+                <input type="text" name="descripcionD" class="form-control" value="En Espera" hidden>
+                <input type="text" name="recetaD" class="form-control" value="En Espera" hidden>
                 <br>
 
                 <div class="form-group">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
+use App\Models\Diagnostico;
 use App\Models\medico;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
@@ -19,8 +20,9 @@ class citaController extends Controller
         $medicos = medico::all();
         $pacientes = Paciente::all();
         $citas = Cita::all();
+        $diagnosticos = Diagnostico::all();
 
-        return view('citas.index', compact('medicos', 'pacientes', 'citas'));
+        return view('citas.index', compact('medicos', 'pacientes', 'citas','diagnosticos'));
     }
 
     /**
@@ -51,6 +53,14 @@ class citaController extends Controller
         $cita->id_medico = $request->input('id_medico');
         $cita->id_paciente = $request->input('id_paciente');
         $cita->save();
+
+        $diagnostico = new Diagnostico();
+        $diagnostico->descripcion = $request->descripcionD;
+        $diagnostico->receta = $request->recetaD;
+        $diagnostico->id_cita = $cita->id;
+        $diagnostico->id_medico = $request->input('id_medico');
+        $diagnostico->save();
+
         return redirect()->route('citas.index');
     }
 
@@ -62,7 +72,7 @@ class citaController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -74,8 +84,6 @@ class citaController extends Controller
     public function edit($id)
     {
         $cita = Cita::where('id',$id)->first();
-        //$medico = medico::where('id', $cita->id_medico);
-        //$paciente = Paciente::where('id', $cita->id_paciente);
         $medicos = medico::all();
         $pacientes = Paciente::all();
         return view('citas.edit', compact('medicos', 'pacientes', 'cita'));
@@ -111,6 +119,25 @@ class citaController extends Controller
     {
         $cita = Cita::where('id',$id)->first();
         $cita->delete();
+
+        return redirect()->route('citas.index');
+    }
+
+    public function diagnostico($id)
+    {
+        $cita = Cita::where('id',$id)->first();
+        $medico = medico::where('id',$cita->id_medico)->first();
+        $diagnostico = Diagnostico:: where('id_cita', $cita->id)->first();
+        return view('citas.diagnostico', compact('cita','medico','diagnostico'));
+    }
+
+    public function diag_store(Request $request, $id)
+    {
+    
+        $diagnostico = Diagnostico:: find($id);
+        $diagnostico->descripcion = $request->descripcion;
+        $diagnostico->receta = $request->receta;
+        $diagnostico->save();
 
         return redirect()->route('citas.index');
     }
