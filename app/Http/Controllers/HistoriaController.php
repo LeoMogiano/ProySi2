@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\antecedenteNoPato;
 use App\Models\antecedentePato;
+use App\Models\Cita;
+use App\Models\Diagnostico;
 use App\Models\HistoriaClinica;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
@@ -93,9 +95,10 @@ class HistoriaController extends Controller
         $historia = HistoriaClinica::find($id)->first();
         $antep = antecedentePato::where('id', $historia->id_antep)->first();
         $antenp = antecedenteNoPato::where('id', $historia->id_antenp)->first();
-        $pacientes = Paciente::all();
-        
-        return view('historias.show', compact('historia','antep','antenp','pacientes'));
+        $paciente = Paciente::find($historia->id_paciente);
+        $citas = Cita::all();
+        $diags = Diagnostico::all();
+        return view('historias.show', compact('historia','antep','antenp','paciente','citas','diags'));
     }
 
     /**
