@@ -90,7 +90,12 @@ class HistoriaController extends Controller
      */
     public function show($id)
     {
-        //
+        $historia = HistoriaClinica::find($id)->first();
+        $antep = antecedentePato::where('id', $historia->id_antep)->first();
+        $antenp = antecedenteNoPato::where('id', $historia->id_antenp)->first();
+        $pacientes = Paciente::all();
+        
+        return view('historias.show', compact('historia','antep','antenp','pacientes'));
     }
 
     /**
@@ -101,10 +106,13 @@ class HistoriaController extends Controller
      */
     public function edit($id)
     {
+        
         $historia = HistoriaClinica::find($id)->first();
-        $antep = antecedentePato::where('id', $historia->id_antep);
-        $antenp = antecedenteNoPato::where('id', $historia->id_antenp);
-        return view('historias.edit', compact('historia','antep','antenp'));
+        $antep = antecedentePato::where('id', $historia->id_antep)->first();
+        $antenp = antecedenteNoPato::where('id', $historia->id_antenp)->first();
+        $pacientes = Paciente::all();
+        
+        return view('historias.edit', compact('historia','antep','antenp','pacientes'));
     }
 
     /**
@@ -116,9 +124,9 @@ class HistoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $historia = HistoriaClinica::find($id);
+        $historia = HistoriaClinica::find($id)->first();
 
-        $antenp = antecedenteNoPato::where('id', $historia->id_antenp);
+        $antenp = antecedenteNoPato::where('id', $historia->id_antenp)->first();
         $antenp->inmunizacion = $request->inmunizacion;
         $antenp->alcohol = $request->alcohol;
         $antenp->tabaquismo = $request->tabaquismo;
@@ -131,10 +139,11 @@ class HistoriaController extends Controller
         $antenp->enfermedad_h = $request->enfermedad_h;
         $antenp->save();
 
-        $antep = antecedentePato::where('id', $historia->id_antep);
+        $antep = antecedentePato::where('id', $historia->id_antep)->first();
         $antep->cardiovas = $request->cardiovas;
         $antep->pulmonar = $request->pulmonar;
         $antep->digestivo = $request->digestivo;
+        $antep->diabetes = $request->diabetes;
         $antep->renales = $request->renales;
         $antep->quirurgico = $request->quirurgico;
         $antep->alergico = $request->alergico;

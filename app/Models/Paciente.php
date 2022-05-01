@@ -9,6 +9,6 @@ class Paciente extends Model
 {
     use HasFactory;
     protected $table='pacientes'; //usa el nombre de la base de datos 
-    protected $fillable = ['ci, nombre, edad, sexo, direccion, telefono, estado'];
+    protected $fillable = ['id','ci, nombre, edad, sexo, direccion, telefono, estado'];
 
 }

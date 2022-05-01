@@ -3,7 +3,11 @@
 @section('title', 'PROSALUD+')
 
 @section('content_header')
-    <h1>Registrar Historia Clinica</h1>
+
+                                
+<h1>Historia Clinica</h1>
+                                
+    
 @stop
 
 @section('content')
@@ -17,8 +21,8 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <label for="estado">Ingresar Paciente</label>
-                        <select name="id_paciente" class="focus border-primary  form-control">
+                        <label for="estado">Paciente :</label>
+                        <select name="id_paciente" class="focus border-primary  form-control" disabled>
                             @foreach ($pacientes as $paciente)
                                 @if ($paciente->id == $historia->id_paciente)
                                     <option value="{{ $paciente->id }}">{{ $paciente->nombre }}</option>
@@ -35,27 +39,27 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="descripcion">Ingresar Descripcion</label>
+                        <label for="descripcion">Descripcion de Historia :</label>
                         <textarea type="text" name="descripcion" class="form-control" value=""
-                            required>{{ $historia->descripcion }}</textarea>
+                        disabled>{{ $historia->descripcion }}</textarea>
                     </div>
                     <div class="col-md-6">
-                        <label for="diagnostico">Ingresar Diagnostico</label>
+                        <label for="diagnostico">Diagnostico :</label>
                         <textarea type="text" name="diagnostico" class="form-control" value=""
-                            required>{{ $historia->diagnostico }}</textarea>
+                        disabled>{{ $historia->diagnostico }}</textarea>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="enfermedad_act">Ingresar Enfermedad Actual</label>
+                        <label for="enfermedad_act">Enfermedad Actual:</label>
                         <input type="text" name="enfermedad_act" class="form-control"
-                            value="{{ $historia->enfermedad_act }}" required>
+                            value="{{ $historia->enfermedad_act }}" disabled>
                     </div>
                     <div class="col-md-6">
-                        <label for="plan_terapeutico">Ingresar Plan Terapeutico</label>
+                        <label for="plan_terapeutico">Plan Terapeutico:</label>
                         <input type="text" name="plan_terapeutico" class="form-control"
-                            value="{{ $historia->plan_terapeutico }}" required>
+                            value="{{ $historia->plan_terapeutico }}" disabled>
                     </div>
                 </div>
 
@@ -66,7 +70,7 @@
 
                     <div class="col-md-4">
                         <label for="caridovas">Cardivascular:</label>
-                        <select name="cardiovas" class="focus border-primary  form-control">
+                        <select name="cardiovas" class="focus border-primary  form-control"disabled>
 
                             @if ($antep->cardiovas == 'SI')
                                 <option value="SI">SI</option>
@@ -80,7 +84,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="pulmonar">Pulmonar:</label>
-                        <select name="pulmonar" class="focus border-primary  form-control">
+                        <select name="pulmonar" class="focus border-primary  form-control"disabled>
                             @if ($antep->pulmonar == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -92,7 +96,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="alergico">Alargias:</label>
-                        <select name="alergico" class="focus border-primary  form-control">
+                        <select name="alergico" class="focus border-primary  form-control"disabled>
                             @if ($antep->alergico == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -109,7 +113,7 @@
 
                     <div class="col-md-4">
                         <label for="digestivo">Digestivos:</label>
-                        <select name="digestivo" class="focus border-primary  form-control">
+                        <select name="digestivo" class="focus border-primary  form-control"disabled>
                             @if ($antep->digestivo == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -121,7 +125,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="renales">Renales:</label>
-                        <select name="renales" class="focus border-primary  form-control">
+                        <select name="renales" class="focus border-primary  form-control"disabled>
                             @if ($antep->renales == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -133,7 +137,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="quirurgico">Quirurgicos:</label>
-                        <select name="quirurgico" class="focus border-primary  form-control">
+                        <select name="quirurgico" class="focus border-primary  form-control"disabled>
                             @if ($antep->quirurgico == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -154,7 +158,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="transfusion">Transfusion :</label>
-                        <select name="transfusion" class="focus border-primary  form-control">
+                        <select name="transfusion" class="focus border-primary  form-control"disabled>
                             @if ($antep->transfusion == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -166,7 +170,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="diabetes">Diabetes :</label>
-                        <select name="diabetes" class="focus border-primary  form-control">
+                        <select name="diabetes" class="focus border-primary  form-control"disabled>
                             @if ($antep->diabetes == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -180,12 +184,12 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="medicamento">Ingresar Medicamentos:</label>
-                        <textarea type="text" name="medicamento" class="form-control" value="" required>{{$antep->medicamento}}</textarea>
+                        <label for="medicamento">Medicamentos de Antecedentes-Patologicos :</label>
+                        <textarea type="text" name="medicamento" class="form-control" value="" disabled>{{$antep->medicamento}}</textarea>
                     </div>
                     <div class="col-md-6">
-                        <label for="descripcion">Ingresar Detallado de Uso de Medicamentos</label>
-                        <textarea type="text" name="descripcionPato" class="form-control" value="" required>{{$antep->descripcion}}</textarea>
+                        <label for="descripcion">Detallado de Uso de Medicamentos :</label>
+                        <textarea type="text" name="descripcionPato" class="form-control" value="" disabled>{{$antep->descripcion}}</textarea>
                     </div>
                 </div>
 
@@ -196,7 +200,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label for="inmunizacion">Inmunizacion :</label>
-                        <select name="inmunizacion" class="focus border-primary  form-control">
+                        <select name="inmunizacion" class="focus border-primary  form-control" disabled>
                             @if ($antenp->inmunizacion == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -208,7 +212,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="alcohol">Alcoholismo :</label>
-                        <select name="alcohol" class="focus border-primary  form-control">
+                        <select name="alcohol" class="focus border-primary  form-control" disabled>
                             @if ($antenp->alcohol == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -220,7 +224,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="tabaquismo">Tabaquismo :</label>
-                        <select name="tabaquismo" class="focus border-primary  form-control">
+                        <select name="tabaquismo" class="focus border-primary  form-control" disabled>
                             @if ($antenp->tabaquismo == 'SI')
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
@@ -234,34 +238,34 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="padre">Ingresar Nombre de Padre:</label>
-                        <input type="text" name="padre" class="form-control" value="{{$antenp->padre}}" required>
+                        <label for="padre">Nombre de Padre:</label>
+                        <input type="text" name="padre" class="form-control" value="{{$antenp->padre}}" disabled>
                     </div>
                     <div class="col-md-6">
                         <label for="enfermedad_padre">Enfermedad de Padre:</label>
-                        <input type="text" name="enfermedad_padre" class="form-control" value="{{$antenp->enfermedad_padre}}" required>
+                        <input type="text" name="enfermedad_padre" class="form-control" value="{{$antenp->enfermedad_padre}}" disabled>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="madre">Ingresar Nombre de Madre:</label>
-                        <input type="text" name="madre" class="form-control" value="{{$antenp->madre}}" required>
+                        <label for="madre">Nombre de Madre:</label>
+                        <input type="text" name="madre" class="form-control" value="{{$antenp->madre}}" disabled>
                     </div>
                     <div class="col-md-6">
                         <label for="enfermedad_madre">Enfermedad de Madre:</label>
-                        <input type="text" name="enfermedad_madre" class="form-control" value="{{$antenp->enfermedad_madre}}" required>
+                        <input type="text" name="enfermedad_madre" class="form-control" value="{{$antenp->enfermedad_madre}}" disabled>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
-                        <label for="cant_hermano">Ingresar Cantidad de Hermanos:</label>
-                        <input type="number" name="cant_hermano" class="form-control" value="{{$antenp->cant_hermano}}" required>
+                        <label for="cant_hermano">Cantidad de Hermanos:</label>
+                        <input type="number" name="cant_hermano" class="form-control" value="{{$antenp->cant_hermano}}" disabled>
                     </div>
                     <div class="col-md-6">
-                        <label for="cant_vivo">Ingresar Cantidad de Hermanos Vivos:</label>
-                        <input type="number" name="cant_vivo" class="form-control" value="{{$antenp->cant_vivo}}" required>
+                        <label for="cant_vivo">Cantidad de Hermanos Vivos:</label>
+                        <input type="number" name="cant_vivo" class="form-control" value="{{$antenp->cant_vivo}}" disabled>
                     </div>
                 </div>
 
@@ -270,7 +274,7 @@
                 <div class="row">
                     <div class="col-md">
                         <label for="enfermedad_h">Enfermedad de Hermanos:</label>
-                        <textarea type="text" name="enfermedad_h" class="form-control" value="" required>{{$antenp->enfermedad_h}}</textarea>
+                        <textarea type="text" name="enfermedad_h" class="form-control" value="" disabled>{{$antenp->enfermedad_h}}</textarea>
                     </div>
                 </div>
 
@@ -289,7 +293,7 @@
 
 
                 <div class="form-group">
-                    <button class="btn btn-primary" type="submit" value="required">Actualizar Historia</button>
+               
                     <a class="btn btn-danger" href="{{ route('historias.index') }}">Volver</a>
                 </div>
 
