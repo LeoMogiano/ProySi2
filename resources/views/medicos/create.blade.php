@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="correo">Ingresar Email</label>
-                        <input type="text" name="email" class="form-control" value="" required>
+                        <input type="email" name="email" class="form-control" value="" required>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
