@@ -47,11 +47,11 @@ class citaController extends Controller
         $cita = new Cita();
         $cita->fecha = $request->input('fecha');
         $cita->hora = $request->input('hora');
-        $cita->fecha = $request->input('fecha');
+        $cita->descripcion = $request->input('descripcion');
         $cita->id_medico = $request->input('id_medico');
         $cita->id_paciente = $request->input('id_paciente');
         $cita->save();
-        
+        return redirect()->route('citas.index');
     }
 
     /**
@@ -93,7 +93,7 @@ class citaController extends Controller
         $cita = Cita::where('id',$id)->first();
         $cita->fecha = $request->input('fecha');
         $cita->hora = $request->input('hora');
-        $cita->fecha = $request->input('fecha');
+        $cita->descripcion = $request->input('descripcion');
         $cita->id_medico = $request->input('id_medico');
         $cita->id_paciente = $request->input('id_paciente');
         $cita->save();

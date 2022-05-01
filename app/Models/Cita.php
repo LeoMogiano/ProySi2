@@ -9,5 +9,5 @@ class Cita extends Model
 {
     use HasFactory;
     protected $table='citas'; 
-    protected $fillable = ['fecha', 'hora', 'id_medico', 'id_paciente'];
+    protected $fillable = ['descripcion','fecha', 'hora', 'id_medico', 'id_paciente'];
 }

@@ -24,7 +24,7 @@
                     <th>Id</th>
                     <th>Fecha</th>
                     <th>Hora</th>
-                   
+                    <th>Descripcion</th>
                     <th>Medico</th>
 
                     <th>Paciente</th>
@@ -38,7 +38,7 @@
                     <td>{{$cita->id}}</td>
                     <td>{{$cita->fecha}}</td>
                     <td>{{$cita->hora}}</td>
-
+                    <td>{{$cita->descripcion}}</td>
                     @foreach($medicos as $medico)
                     @if ($cita->id_medico == $medico->id)
                     <td>{{$medico->nombre}}</td>

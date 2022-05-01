@@ -60,7 +60,7 @@
 
                     <td>
                         
-                        <a href="{{ url('medicos/especialidad', $medico->id) }}" style="margin-top: 0.35rem" class="btn btn-warning"><i class="fas fa-plus-square"></i> Especialidad</a>
+                        <a href="{{ url('medicos/especialidad', $medico->id) }}" style="margin-top: 0.35rem" class="btn btn-warning btn-sm"><i class="fas fa-plus-square"></i> Especialidad</a>
 
                         <a class="btn btn-primary btn-sm" style="margin-top: 5px" href="{{route('medicos.edit',$medico)}}"><i class="fas fa-pencil-alt"></i>  Editar</a>  
                         
