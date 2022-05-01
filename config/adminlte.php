@@ -282,7 +282,13 @@ return [
         [
             'text' => 'Citas Medicas',
             'route'  => 'citas.index',
-            'icon' => 'fas fa-hospital-user',
+            'icon' => 'fas fa-hand-holding-medical',
+        ],
+
+        [
+            'text' => 'Historias Clinicas',
+            'route'  => 'historias.index',
+            'icon' => 'fas fa-hand-holding-medical',
         ],
         [
             'text'    => 'multilevel',
@@ -322,22 +328,7 @@ return [
                 ],
             ],
         ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+       
     ],
 
     /*
