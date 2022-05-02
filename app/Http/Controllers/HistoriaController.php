@@ -6,9 +6,12 @@ use App\Models\antecedenteNoPato;
 use App\Models\antecedentePato;
 use App\Models\Cita;
 use App\Models\Diagnostico;
+use App\Models\Documento;
 use App\Models\HistoriaClinica;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Node\Block\Document;
 
 class HistoriaController extends Controller
 {
@@ -58,7 +61,7 @@ class HistoriaController extends Controller
         $antenp->save();
 
         $antep = new antecedentePato();
-        
+
         $antep->cardiovas = $request->cardiovas;
         $antep->pulmonar = $request->pulmonar;
         $antep->digestivo = $request->digestivo;
@@ -80,7 +83,30 @@ class HistoriaController extends Controller
         $historia->id_antep = $antep->id;
         $historia->id_antenp = $antenp->id;
         $historia->save();
-    
+
+        $files = $request->file('files');
+
+
+        foreach ($files as $file) {
+
+            $folder = "archivos";
+
+            $doc = new Documento();
+            $doc->descripcion = $request->desDoc;
+            
+            $path = Storage::disk('s3')->put($folder, $file, 'public');
+          
+            $doc->url = $path;
+            $doc->id_historia = $historia->id;
+            $doc->save();
+
+           // return Storage::disk('s3')->url($doc->url); para mostrar
+
+       
+
+       
+        }
+
         return redirect()->route('historias.index');
     }
 
@@ -98,7 +124,8 @@ class HistoriaController extends Controller
         $paciente = Paciente::find($historia->id_paciente);
         $citas = Cita::all();
         $diags = Diagnostico::all();
-        return view('historias.show', compact('historia','antep','antenp','paciente','citas','diags'));
+        $documentos = Documento::all();
+        return view('historias.show', compact('historia', 'antep', 'antenp', 'paciente', 'citas', 'diags', 'documentos'));
     }
 
     /**
@@ -109,13 +136,14 @@ class HistoriaController extends Controller
      */
     public function edit($id)
     {
-        
+
         $historia = HistoriaClinica::find($id)->first();
         $antep = antecedentePato::where('id', $historia->id_antep)->first();
         $antenp = antecedenteNoPato::where('id', $historia->id_antenp)->first();
         $pacientes = Paciente::all();
-        
-        return view('historias.edit', compact('historia','antep','antenp','pacientes'));
+        $documentos = Documento::all();
+
+        return view('historias.edit', compact('historia', 'antep', 'antenp', 'pacientes','documentos'));
     }
 
     /**
@@ -164,6 +192,9 @@ class HistoriaController extends Controller
         $historia->id_antenp = $antenp->id;
         $historia->save();
 
+
+
+
         return redirect()->route('historias.index');
     }
 
@@ -183,6 +214,20 @@ class HistoriaController extends Controller
         $antep->delete();
 
         return redirect()->route('historias.index');
+    }
+
+    public function elim_archivo($id)
+    {   
+        
+        $doc = Documento::find($id);
+        
+        
+        Storage::disk('s3')->delete($doc->url);
+ 
+
+        $doc->delete();
+
+        return redirect()->back();
 
     }
 }

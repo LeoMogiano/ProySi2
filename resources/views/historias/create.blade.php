@@ -10,7 +10,7 @@
     <div class="card">
         <div class="card-body">
 
-            <form action="{{ route('historias.store') }}" method="post">
+            <form action="{{ route('historias.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <h2>Ficha de Identificación</h2>
 
@@ -198,17 +198,24 @@
 
 
 
-               <div class="row">
-                   <div class="col-md">
-                    <label for="enfermedad_h">Enfermedad de Hermanos:</label>
-                    <textarea type="text" name="enfermedad_h" class="form-control" value="" required> </textarea>
-                   </div>
-               </div>
-
-
-
-
-
+                <div class="row">
+                    <div class="col-md">
+                        <label for="enfermedad_h">Enfermedad de Hermanos:</label>
+                        <textarea type="text" name="enfermedad_h" class="form-control" value="" required> </textarea>
+                    </div>
+                </div>
+                <br>
+                <h2>Subida de Documentos</h2>
+                <div class="row">
+                    <div class="col-md 6">
+                        <label for="archivo"><b>Documentos: </b>
+                        <input type="file" name="files[]" multiple >
+                    </div>
+                    <div class="col-md-6">
+                        <label for="archivo"><b>Documentas: </b>
+                            <input type="text" name="desDoc" >
+                    </div>
+                </div>
 
 
                 <br>

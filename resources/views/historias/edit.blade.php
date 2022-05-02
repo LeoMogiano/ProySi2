@@ -181,11 +181,12 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="medicamento">Ingresar Medicamentos:</label>
-                        <textarea type="text" name="medicamento" class="form-control" value="" required>{{$antep->medicamento}}</textarea>
+                        <textarea type="text" name="medicamento" class="form-control" value="" required>{{ $antep->medicamento }}</textarea>
                     </div>
                     <div class="col-md-6">
                         <label for="descripcion">Ingresar Detallado de Uso de Medicamentos</label>
-                        <textarea type="text" name="descripcionPato" class="form-control" value="" required>{{$antep->descripcion}}</textarea>
+                        <textarea type="text" name="descripcionPato" class="form-control" value=""
+                            required>{{ $antep->descripcion }}</textarea>
                     </div>
                 </div>
 
@@ -235,33 +236,37 @@
                 <div class="row">
                     <div class="col-md-6">
                         <label for="padre">Ingresar Nombre de Padre:</label>
-                        <input type="text" name="padre" class="form-control" value="{{$antenp->padre}}" required>
+                        <input type="text" name="padre" class="form-control" value="{{ $antenp->padre }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="enfermedad_padre">Enfermedad de Padre:</label>
-                        <input type="text" name="enfermedad_padre" class="form-control" value="{{$antenp->enfermedad_padre}}" required>
+                        <input type="text" name="enfermedad_padre" class="form-control"
+                            value="{{ $antenp->enfermedad_padre }}" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="madre">Ingresar Nombre de Madre:</label>
-                        <input type="text" name="madre" class="form-control" value="{{$antenp->madre}}" required>
+                        <input type="text" name="madre" class="form-control" value="{{ $antenp->madre }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="enfermedad_madre">Enfermedad de Madre:</label>
-                        <input type="text" name="enfermedad_madre" class="form-control" value="{{$antenp->enfermedad_madre}}" required>
+                        <input type="text" name="enfermedad_madre" class="form-control"
+                            value="{{ $antenp->enfermedad_madre }}" required>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-6">
                         <label for="cant_hermano">Ingresar Cantidad de Hermanos:</label>
-                        <input type="number" name="cant_hermano" class="form-control" value="{{$antenp->cant_hermano}}" required>
+                        <input type="number" name="cant_hermano" class="form-control"
+                            value="{{ $antenp->cant_hermano }}" required>
                     </div>
                     <div class="col-md-6">
                         <label for="cant_vivo">Ingresar Cantidad de Hermanos Vivos:</label>
-                        <input type="number" name="cant_vivo" class="form-control" value="{{$antenp->cant_vivo}}" required>
+                        <input type="number" name="cant_vivo" class="form-control" value="{{ $antenp->cant_vivo }}"
+                            required>
                     </div>
                 </div>
 
@@ -270,12 +275,40 @@
                 <div class="row">
                     <div class="col-md">
                         <label for="enfermedad_h">Enfermedad de Hermanos:</label>
-                        <textarea type="text" name="enfermedad_h" class="form-control" value="" required>{{$antenp->enfermedad_h}}</textarea>
+                        <textarea type="text" name="enfermedad_h" class="form-control" value=""
+                            required>{{ $antenp->enfermedad_h }}</textarea>
                     </div>
                 </div>
+                <br>
 
+                <h3>Documentos Clinicos :</h3>
+                <br>
+                @foreach ($documentos as $doc)
+                    @if ($doc->id_historia == $historia->id)
+                        <div class="row">
 
+                            <div class="card"
+                                style="margin-left: auto;margin-right: auto;display: block;width: 60rem;">
+                                <img src="{{ Storage::disk('s3')->url($doc->url) }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $doc->descripcion }}</h5>
+                                    {{-- <p class="card-text">{{ $post->description }}</p> --}}
 
+                                </div>
+                            </div>
+                        </div>
+
+                        <form action="{{ url('historias/elim_archivo', $doc->id) }}" method="POST">
+                            @csrf
+                            @method('delete')
+
+                            <button class="btn btn-danger btn-sm" style="margin-top: 0.35rem"
+                                onclick="return confirm('¿ESTÁ SEGURO DE BORRAR?')" value="Borrar"><i
+                                    class="fas fa-trash"></i> Eliminar</button>
+
+                        </form>
+                    @endif
+                @endforeach
 
 
 

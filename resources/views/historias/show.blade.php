@@ -312,13 +312,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="padre">Descripción:</label>
-                                        <textarea type="text" class="form-control" value=""
-                                            disabled>{{ $diag->descripcion }} </textarea>
+                                        <textarea type="text" class="form-control" value="" disabled>{{ $diag->descripcion }} </textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="padre">Receta:</label>
-                                        <textarea type="text" class="form-control" value=""
-                                            disabled>{{ $diag->receta }} </textarea>
+                                        <textarea type="text" class="form-control" value="" disabled>{{ $diag->receta }} </textarea>
                                     </div>
                                 </div>
                             @endif
@@ -326,7 +324,24 @@
                     @endif
                 @endforeach
 
+                <h3>Documentos Clinicos </h3>
+                <br>
+                @foreach ($documentos as $doc)
+                    @if ($doc->id_historia == $historia->id)
+                        <div class="row">
 
+                            <div class="card"
+                                style="margin-left: auto;margin-right: auto;display: block;width: 60rem;">
+                                <img src="{{ Storage::disk('s3')->url($doc->url) }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $doc->descripcion }}</h5>
+                                    {{-- <p class="card-text">{{ $post->description }}</p> --}}
+
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
 
                 <br>
 

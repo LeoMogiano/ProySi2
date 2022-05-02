@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\citaController;
+use App\Http\Controllers\documentoController;
 use App\Http\Controllers\HistoriaController;
 use App\Http\Controllers\medicoController;
 use App\Http\Controllers\pacienteController;
@@ -37,3 +38,4 @@ Route::resource('citas', citaController::class)->names('citas');
 Route::resource('historias', HistoriaController::class)->names('historias');
 Route::get('citas/diagnostico/{id}', [citaController::class, 'diagnostico']);
 Route::post('citas/diag_store/{id}', [citaController::class, 'diag_store']);
+Route::delete('historias/elim_archivo/{id}', [HistoriaController::class, 'elim_archivo']);
