@@ -288,7 +288,7 @@ return [
         [
             'text' => 'Historias Clinicas',
             'route'  => 'historias.index',
-            'icon' => 'fas fa-hand-holding-medical',
+            'icon' => 'fas fa-file-medical-alt',
         ],
         [
             'text'    => 'multilevel',

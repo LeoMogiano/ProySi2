@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($historias as $historia)
+            @foreach ($historias as $historia)
                 <tr>
                     <td>{{$historia->id}}</td>
                     <td>{{$historia->descripcion}}</td>
@@ -41,9 +41,7 @@
                     
 
                     <td>
-                        <a class="btn btn-warning btn-sm" style="margin-top: 5px" href="{{route('historias.show',$historia)}}"><i class="fas fa-eye"></i></i>  Ver </a> 
-                         
-                        <a class="btn btn-primary btn-sm" style="margin-top: 5px" href="{{route('historias.edit',$historia)}}"><i class="fas fa-pencil-alt"></i>  Editar</a>  
+                      
                         
                         <form action="{{route('historias.destroy',$historia)}}" method="POST">
                             @csrf
@@ -53,9 +51,13 @@
                            
                         </form>
 
+                        <a class="btn btn-warning btn-sm" style="margin-top: 5px" href="{{route('historias.show', $historia)}}"><i class="fas fa-eye"></i></i>  Ver </a> 
+                         
+                        <a class="btn btn-primary btn-sm" style="margin-top: 5px" href="{{route('historias.edit', $historia->id)}}"><i class="fas fa-pencil-alt"></i>  Editar</a>  
+
                     </td>
                 </tr>
-                @endforeach
+            @endforeach
             </tbody>
         </table>
 

@@ -281,34 +281,7 @@
                 </div>
                 <br>
 
-                <h3>Documentos Clinicos :</h3>
-                <br>
-                @foreach ($documentos as $doc)
-                    @if ($doc->id_historia == $historia->id)
-                        <div class="row">
-
-                            <div class="card"
-                                style="margin-left: auto;margin-right: auto;display: block;width: 60rem;">
-                                <img src="{{ Storage::disk('s3')->url($doc->url) }}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $doc->descripcion }}</h5>
-                                    {{-- <p class="card-text">{{ $post->description }}</p> --}}
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <form action="{{ url('historias/elim_archivo', $doc->id) }}" method="POST">
-                            @csrf
-                            @method('delete')
-
-                            <button class="btn btn-danger btn-sm" style="margin-top: 0.35rem"
-                                onclick="return confirm('¿ESTÁ SEGURO DE BORRAR?')" value="Borrar"><i
-                                    class="fas fa-trash"></i> Eliminar</button>
-
-                        </form>
-                    @endif
-                @endforeach
+                
 
 
 
@@ -327,6 +300,34 @@
                 </div>
 
             </form>
+
+            <h3>Documentos Clinicos :</h3>
+                <br>
+                @foreach ($documentos as $doc)
+                    @if ($doc->id_historia == $historia->id)
+                    <div class="row">
+
+                        <div class="card" style="margin-left: auto;margin-right: auto;display: block;width: 60rem;">
+                            <img  src="{{ Storage::disk('s3')->url($doc->url) }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $doc->descripcion }}</h5>
+                               {{--  <p class="card-text">{{ $post->description }}</p> --}}
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <form action="{{ url('historias/elim_archivo', $doc) }}"  method="POST">
+                        @csrf
+                        @method('DELETE')
+                     
+                        <button class="btn btn-danger btn-sm" style="margin-top: 0.35rem"><i class="fas fa-trash"></i>  Eliminar</button>
+                       
+                    </form>
+
+                    @endif
+                    
+                @endforeach
 
         </div>
     </div>

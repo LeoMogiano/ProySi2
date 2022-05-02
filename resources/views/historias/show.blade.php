@@ -327,7 +327,8 @@
                 <h3>Documentos Clinicos </h3>
                 <br>
                 @foreach ($documentos as $doc)
-                    @if ($doc->id_historia == $historia->id)
+    
+                    @if ($historia->id == $doc->id_historia)
                         <div class="row">
 
                             <div class="card"

@@ -118,7 +118,7 @@ class HistoriaController extends Controller
      */
     public function show($id)
     {
-        $historia = HistoriaClinica::find($id)->first();
+        $historia = HistoriaClinica::find($id);
         $antep = antecedentePato::where('id', $historia->id_antep)->first();
         $antenp = antecedenteNoPato::where('id', $historia->id_antenp)->first();
         $paciente = Paciente::find($historia->id_paciente);
@@ -137,7 +137,8 @@ class HistoriaController extends Controller
     public function edit($id)
     {
 
-        $historia = HistoriaClinica::find($id)->first();
+        $historia = HistoriaClinica::find($id);
+        
         $antep = antecedentePato::where('id', $historia->id_antep)->first();
         $antenp = antecedenteNoPato::where('id', $historia->id_antenp)->first();
         $pacientes = Paciente::all();
@@ -194,7 +195,6 @@ class HistoriaController extends Controller
 
 
 
-
         return redirect()->route('historias.index');
     }
 
@@ -218,7 +218,7 @@ class HistoriaController extends Controller
 
     public function elim_archivo($id)
     {   
-        
+    
         $doc = Documento::find($id);
         
         
