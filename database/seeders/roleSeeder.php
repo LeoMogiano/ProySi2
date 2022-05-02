@@ -19,7 +19,12 @@ class roleSeeder extends Seeder
         $rol1= Role::create(['name'=>'Administrador']);
         $rol2= Role::create(['name'=>'Paciente']);
         $rol3= Role::create(['name'=>'Medico']);
-        permission::create(['name'=>'Gestionar Perfil'])->syncRoles([$rol1, $rol3]) ;
+        permission::create(['name'=>'Gestionar Usuarios'])->syncRoles([$rol1, $rol3]) ;
+        permission::create(['name'=>'Gestionar Pacientes'])->syncRoles([$rol1, $rol3]) ;
+        permission::create(['name'=>'Gestionar Medicos'])->syncRoles([$rol1, $rol3]) ;
+        permission::create(['name'=>'Gestionar Roles'])->syncRoles([$rol1, $rol3]) ;
+        permission::create(['name'=>'Gestionar Citas'])->syncRoles([$rol1, $rol3]) ;
+        permission::create(['name'=>'Gestionar Historias Medicas'])->syncRoles([$rol1, $rol3]) ;
 
     }
 }
