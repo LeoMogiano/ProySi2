@@ -324,27 +324,6 @@
                     @endif
                 @endforeach
 
-                <h3>Documentos Clinicos </h3>
-                <br>
-                @foreach ($documentos as $doc)
-    
-                    @if ($historia->id == $doc->id_historia)
-                        <div class="row">
-
-                            <div class="card"
-                                style="margin-left: auto;margin-right: auto;display: block;width: 60rem;">
-                                <img src="{{ Storage::disk('s3')->url($doc->url) }}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $doc->descripcion }}</h5>
-                                    {{-- <p class="card-text">{{ $post->description }}</p> --}}
-
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-
-                <br>
 
 
 
@@ -358,6 +337,48 @@
                 </div>
 
             </form>
+            <br>
+            <h3>Documentos Clinicos :</h3>
+
+
+
+            <div class="card-body">
+                <table class="table table-striped table-bordered shadow-lg mt-4" id="historias">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Documento Descripcion</th>
+
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($documentos as $doc)
+                            @if ($doc->id_historia == $historia->id)
+                                <tr>
+
+                                    <td>{{ $doc->id }}</td>
+                                    <td>{{ $doc->descripcion }}</td>
+
+
+                                    <td>
+                                        <a class="btn btn-warning btn-sm" style="margin-top: 5px"
+                                            href="{{ Storage::disk('s3')->url($doc->url) }}"><i class="fas fa-eye"></i>
+                                            Ver </a>
+                                        <a class="btn btn-primary btn-sm" style="margin-top: 5px"
+                                            href="{{ route('documentos.show', $doc) }}" download="{{ $doc->nombre }}">
+                                            Descargar Archivo</a>
+                                        
+
+                                    </td>
+
+                                </tr>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
 
         </div>
     </div>

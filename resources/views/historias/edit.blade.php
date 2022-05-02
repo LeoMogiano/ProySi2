@@ -281,7 +281,7 @@
                 </div>
                 <br>
 
-                
+
 
 
 
@@ -300,45 +300,65 @@
                 </div>
 
             </form>
-
+            <br>
             <h3>Documentos Clinicos :</h3>
-                <br>
-                @foreach ($documentos as $doc)
-                    @if ($doc->id_historia == $historia->id)
-                    <div class="row">
 
-                        <div class="card" style="margin-left: auto;margin-right: auto;display: block;width: 60rem;">
-                            <img  src="{{ Storage::disk('s3')->url($doc->url) }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $doc->descripcion }}</h5>
-                               {{--  <p class="card-text">{{ $post->description }}</p> --}}
 
-                            </div>
-                        </div>
-                    </div>
-                   
-                    <form action="{{ url('historias/elim_archivo', $doc) }}"  method="POST">
-                        @csrf
-                        @method('DELETE')
-                     
-                        <button class="btn btn-danger btn-sm" style="margin-top: 0.35rem"><i class="fas fa-trash"></i>  Eliminar</button>
-                       
-                    </form>
 
-                    @endif
-                    
-                @endforeach
+            <div class="card-body">
+                <table class="table table-striped table-bordered shadow-lg mt-4" id="historias">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Documento Descripcion</th>
 
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($documentos as $doc)
+                            @if ($doc->id_historia == $historia->id)
+                                <tr>
+
+                                    <td>{{ $doc->id }}</td>
+                                    <td>{{ $doc->descripcion }}</td>
+
+
+                                    <td>
+                                        <a class="btn btn-warning btn-sm" style="margin-top: 5px"
+                                            href="{{ Storage::disk('s3')->url($doc->url) }}"><i class="fas fa-eye"></i>
+                                            Ver </a>
+                                        <a class="btn btn-primary btn-sm" style="margin-top: 5px"
+                                            href="{{ route('documentos.show', $doc) }}" download="{{ $doc->nombre }}">
+                                            Descargar Archivo</a>
+                                        <form action="{{ url('historias/elim_archivo', $doc) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button class="btn btn-danger btn-sm" style="margin-top: 0.35rem"><i
+                                                    class="fas fa-trash"></i>
+                                                Eliminar</button>
+
+                                        </form>
+
+                                    </td>
+
+                                </tr>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
         </div>
-    </div>
 
-@stop
+    @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    @section('css')
+        <link rel="stylesheet" href="/css/admin_custom.css">
 
-@stop
+    @stop
 
-@section('js')
+    @section('js')
 
-@stop
+    @stop

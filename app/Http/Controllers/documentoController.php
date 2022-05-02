@@ -16,8 +16,7 @@ class documentoController extends Controller
      */
     public function index()
     {
-        $documentos = Documento::all();
-        return view('documentos.index',compact('documentos'));
+      
     }
 
     /**
@@ -49,7 +48,8 @@ class documentoController extends Controller
      */
     public function show($id)
     {
-        //
+       $doc= Documento::find($id);
+        return Storage::disk('s3')->get($doc->url); 
     }
 
     /**

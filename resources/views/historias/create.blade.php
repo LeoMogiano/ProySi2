@@ -212,7 +212,7 @@
                         <input type="file" name="files[]" multiple >
                     </div>
                     <div class="col-md-6">
-                        <label for="archivo"><b>Documentas: </b>
+                        <label for="archivo"><b>Descripcion: </b>
                             <input type="text" name="desDoc" >
                     </div>
                 </div>

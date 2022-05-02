@@ -97,6 +97,7 @@ class HistoriaController extends Controller
             $path = Storage::disk('s3')->put($folder, $file, 'public');
           
             $doc->url = $path;
+            $doc->nombre = basename($path);
             $doc->id_historia = $historia->id;
             $doc->save();
 
