@@ -257,77 +257,52 @@ return [
             'can'       =>  'Gestionar Perfil'
         ], */
 
-        
+        [
+            'text' => 'Bitacora',
+            'route'  => 'Bitacora.index',
+            'icon' => 'fas fa-fw fa-user',
+            'can' => 'Gestionar Usuarios'
+            
+        ],
         [
             'text' => 'Usuarios',
             'route'  => 'users.index',
             'icon' => 'fas fa-fw fa-user',
+            'can' => 'Gestionar Usuarios'
             
         ],
         [
             'text' => 'Roles',
             'route'  => 'roles.index',
             'icon' => 'fas fa-ruler',
+            'can' => 'Gestionar Roles'
         ],
         [
             'text' => 'Medicos',
             'route'  => 'medicos.index',
             'icon' => 'fas fa-book-medical',
+            'can' => 'Gestionar Medicos'
         ],
         [
             'text' => 'Pacientes',
             'route'  => 'pacientes.index',
             'icon' => 'fas fa-hospital-user',
+            'can' => 'Gestionar Pacientes'
         ],
         [
             'text' => 'Citas Medicas',
             'route'  => 'citas.index',
             'icon' => 'fas fa-hand-holding-medical',
+            'can' => 'Gestionar Citas'
         ],
 
         [
             'text' => 'Historias Clinicas',
             'route'  => 'historias.index',
             'icon' => 'fas fa-file-medical-alt',
+            'can' => 'Gestionar Historias Medicas'
         ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
+        
        
     ],
 

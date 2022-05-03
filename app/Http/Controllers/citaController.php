@@ -7,6 +7,7 @@ use App\Models\Diagnostico;
 use App\Models\medico;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class citaController extends Controller
 {
@@ -61,6 +62,11 @@ class citaController extends Controller
         $diagnostico->id_medico = $request->input('id_medico');
         $diagnostico->save();
 
+        activity()->useLog('Citas')->log('Registró')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $cita->id;
+        $lastActivity->save();
+
         return redirect()->route('citas.index');
     }
 
@@ -106,6 +112,11 @@ class citaController extends Controller
         $cita->id_paciente = $request->input('id_paciente');
         $cita->save();
 
+        activity()->useLog('Citas')->log('Editó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $cita->id;
+        $lastActivity->save();
+
         return redirect()->route('citas.index');
     }
 
@@ -118,6 +129,15 @@ class citaController extends Controller
     public function destroy($id)
     {
         $cita = Cita::where('id',$id)->first();
+
+        activity()->useLog('Citas')->log('Eliminó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $cita->id;
+        $lastActivity->save();
+
+        $esp=Diagnostico::where('id_cita',$cita->id);
+        $esp->delete();
+
         $cita->delete();
 
         return redirect()->route('citas.index');
@@ -138,6 +158,11 @@ class citaController extends Controller
         $diagnostico->descripcion = $request->descripcion;
         $diagnostico->receta = $request->receta;
         $diagnostico->save();
+
+        activity()->useLog('Citas')->log('Registró Diagnostico')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $diagnostico->id;
+        $lastActivity->save();
 
         return redirect()->route('citas.index');
     }

@@ -22,6 +22,8 @@ class CreateHistoriaClinicaTable extends Migration
             
             $table->unsignedBigInteger('id_paciente');
             $table->foreign('id_paciente')->on('pacientes')->references('id'); 
+            $table->unsignedBigInteger('id_medico');
+            $table->foreign('id_medico')->on('medicos')->references('id'); 
             $table->unsignedBigInteger('id_antep');
             $table->foreign('id_antep')->on('antecedentes_pato')->references('id'); 
             $table->unsignedBigInteger('id_antenp');

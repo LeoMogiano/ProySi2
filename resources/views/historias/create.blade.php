@@ -15,11 +15,20 @@
                 <h2>Ficha de Identificación</h2>
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label for="estado">Ingresar Paciente</label>
                         <select name="id_paciente" class="focus border-primary  form-control">
                             @foreach ($pacientes as $paciente)
                                 <option value="{{ $paciente->id }}">{{ $paciente->nombre }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                
+                    <div class="col-md-6">
+                        <label for="estado">Ingresar Medico</label>
+                        <select name="id_medico" class="focus border-primary  form-control">
+                            @foreach ($medicos as $medico)
+                                <option value="{{ $medico->id }}">{{ $medico->nombre }}</option>
                             @endforeach
                         </select>
                     </div>

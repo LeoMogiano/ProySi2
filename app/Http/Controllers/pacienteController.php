@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paciente;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class pacienteController extends Controller
 {
@@ -56,6 +57,11 @@ class pacienteController extends Controller
         $user->assignRole('Paciente');
         $user->save();
 
+        activity()->useLog('Pacientes')->log('Registró')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $paciente->id;
+        $lastActivity->save();
+
         return redirect()->route('pacientes.index', compact('paciente'));
        
     }
@@ -106,6 +112,11 @@ class pacienteController extends Controller
         $user->name = $paciente->nombre;
         $user->save();
 
+        activity()->useLog('Pacientes')->log('Editó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $paciente->id;
+        $lastActivity->save();
+
         return redirect()->route('pacientes.index');
     }
 
@@ -118,10 +129,18 @@ class pacienteController extends Controller
     public function destroy($id)
     {
         $paciente = Paciente::findOrFail($id);
+
+        activity()->useLog('Pacientes')->log('Eliminó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $paciente->id;
+        $lastActivity->save();
+
         $paciente->delete();
 
         $user = User::where('cod_p', $paciente->id);
         $user->delete();
+
+        
 
         return redirect()->route('pacientes.index');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -45,6 +46,12 @@ class roleController extends Controller
         $rol->name=$request->name;
         $rol->save();
         $rol->syncPermissions($request->permisos);
+
+        activity()->useLog('Roles')->log('Registró')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $rol->id;
+        $lastActivity->save();
+
         return redirect()->route('roles.index');
     }
 
@@ -78,6 +85,7 @@ class roleController extends Controller
         $per = $role->getPermissionNames();
         $perA = json_decode($per, true);
 
+
         return view('roles.edit', compact('role', 'permisos', 'permisoArray', 'per', 'perA'));
     
     }
@@ -100,6 +108,12 @@ class roleController extends Controller
         $role->syncPermissions($request->permisos);
 
         $role->save();
+
+        activity()->useLog('Roles')->log('Editó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $role->id;
+        $lastActivity->save();
+
         return redirect()->route('roles.index');
     }
 
@@ -112,6 +126,12 @@ class roleController extends Controller
     public function destroy(Role $role)
     {
         Role::destroy($role->id);
+
+        activity()->useLog('Roles')->log('Eliminó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $role->id;
+        $lastActivity->save();
+
         return redirect('roles');
     }
 }

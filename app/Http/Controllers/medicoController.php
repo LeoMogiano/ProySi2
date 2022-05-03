@@ -6,6 +6,7 @@ use App\Models\Especialidad;
 use App\Models\medico;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 class medicoController extends Controller
 {
@@ -64,7 +65,7 @@ class medicoController extends Controller
         $user->name = $medico->nombre;
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password'));
-        $user->cod_p = $medico->id;
+        $user->cod_m = $medico->id;
         $user->assignRole('Medico');
         $user->save();
 
@@ -72,6 +73,11 @@ class medicoController extends Controller
         $esp->descripcion = $request->input('descripcion');
         $esp->id_medico = $medico->id;
         $esp->save();
+
+        activity()->useLog('Medicos')->log('Registró')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $medico->id;
+        $lastActivity->save();
         
         return redirect()->route('medicos.index', compact('medico','esp'));
     }
@@ -118,9 +124,14 @@ class medicoController extends Controller
         $medico->estado=$request->input('estado');
         $medico->save();
 
-        $user = User::where('cod_p',$medico->id)->first();
+        $user = User::where('cod_m',$medico->id)->first();
         $user->name = $medico->nombre;
         $user->save();
+
+        activity()->useLog('Medicos')->log('Editoó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $medico->id;
+        $lastActivity->save();
 
         return redirect()->route('medicos.index');
 
@@ -137,12 +148,17 @@ class medicoController extends Controller
         
         $medico= medico::findOrFail($id);
 
+        activity()->useLog('Medicos')->log('Eliminó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $medico->id;
+        $lastActivity->save();
+
         $esp=Especialidad::where('id_medico',$medico->id);
         $esp->delete();
 
         $medico->delete();
 
-        $user = User::where('cod_p', $medico->id);
+        $user = User::where('cod_m', $medico->id);
         $user->delete();
 
         return redirect()->route('medicos.index');
@@ -162,6 +178,11 @@ class medicoController extends Controller
        $esp->descripcion = $request->input('descripcion');
        $esp->id_medico = $request->input('id_medico');
        $esp->save();
+
+       activity()->useLog('Especialidad')->log('Registró Especialidad')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $esp->id;
+        $lastActivity->save();
 
        return redirect()->route('medicos.index');
         

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\citaController;
 use App\Http\Controllers\documentoController;
 use App\Http\Controllers\HistoriaController;
@@ -40,3 +41,4 @@ Route::get('citas/diagnostico/{id}', [citaController::class, 'diagnostico']);
 Route::post('citas/diag_store/{id}', [citaController::class, 'diag_store']);
 Route::delete('historias/elim_archivo/{id}', [HistoriaController::class, 'elim_archivo']);
 Route::resource('documentos', documentoController::class)->names('documentos');
+Route::resource('Bitacora',BitacoraController::class)->names('Bitacora');

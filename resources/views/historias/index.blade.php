@@ -29,6 +29,7 @@
             </thead>
             <tbody>
             @foreach ($historias as $historia)
+            @can('Admin')
                 <tr>
                     <td>{{$historia->id}}</td>
                     <td>{{$historia->descripcion}}</td>
@@ -57,6 +58,67 @@
 
                     </td>
                 </tr>
+                @endcan
+
+
+                @can('Medico')
+                @if(Auth::user()->cod_m == $historia->id_medico)
+                <tr>
+                    <td>{{$historia->id}}</td>
+                    <td>{{$historia->descripcion}}</td>
+
+                    @foreach ($pacientes as $paciente)
+                        @if($historia->id_paciente == $paciente->id)
+                        <td>{{$paciente->nombre}}</td>
+                        @endif
+                    @endforeach
+                    
+
+                    <td>
+                      
+                        
+                        <form action="{{route('historias.destroy',$historia)}}" method="POST">
+                            @csrf
+                            @method('delete')
+                           
+                            <button class="btn btn-danger btn-sm" style="margin-top: 0.35rem" onclick="return confirm('¿ESTÁ SEGURO DE BORRAR?')" value="Borrar"><i class="fas fa-trash"></i>  Eliminar</button>
+                           
+                        </form>
+
+                        <a class="btn btn-warning btn-sm" style="margin-top: 5px" href="{{route('historias.show', $historia)}}"><i class="fas fa-eye"></i></i>  Ver </a> 
+                         
+                        <a class="btn btn-primary btn-sm" style="margin-top: 5px" href="{{route('historias.edit', $historia->id)}}"><i class="fas fa-pencil-alt"></i>  Editar</a>  
+
+                    </td>
+                </tr>
+                @endif
+                @endcan
+
+                @can('Paciente')
+                @if (Auth::user()->cod_p == $historia->id_paciente)
+                    
+                
+                <tr>
+                    <td>{{$historia->id}}</td>
+                    <td>{{$historia->descripcion}}</td>
+
+                    @foreach ($pacientes as $paciente)
+                        @if($historia->id_paciente == $paciente->id)
+                        <td>{{$paciente->nombre}}</td>
+                        @endif
+                    @endforeach
+                    
+
+                    <td>
+                      
+                    
+                        <a class="btn btn-warning btn-sm" style="margin-top: 5px" href="{{route('historias.show', $historia)}}"><i class="fas fa-eye"></i></i>  Ver </a> 
+                         
+                      
+                    </td>
+                </tr>
+                @endif
+                @endcan
             @endforeach
             </tbody>
         </table>

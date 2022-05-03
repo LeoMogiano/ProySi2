@@ -10,7 +10,7 @@
     <div class="card">
         <div class="card-body">
 
-            <form action="{{ route('historias.update', $historia) }}" method="post">
+            <form action="{{ route('historias.update', $historia->id) }}" method="post">
                 @csrf
                 @method('put')
                 <h2>Ficha de Identificación</h2>

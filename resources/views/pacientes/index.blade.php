@@ -31,7 +31,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                
                     @foreach ($pacientes as $paciente)
+                  
                         <tr>
                             <td>{{ $paciente->id }}</td>
                             <td>{{ $paciente->ci }}</td>
@@ -63,7 +65,10 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                       
+                       @endforeach
+                
+
                 </tbody>
             </table>
 

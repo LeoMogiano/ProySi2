@@ -8,10 +8,13 @@ use App\Models\Cita;
 use App\Models\Diagnostico;
 use App\Models\Documento;
 use App\Models\HistoriaClinica;
+use App\Models\medico;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use League\CommonMark\Node\Block\Document;
+use Spatie\Activitylog\Models\Activity;
 
 class HistoriaController extends Controller
 {
@@ -24,7 +27,8 @@ class HistoriaController extends Controller
     {
         $historias = HistoriaClinica::all();
         $pacientes = Paciente::all();
-
+       
+        
         return view('historias.index', compact('historias', 'pacientes'));
     }
 
@@ -36,7 +40,8 @@ class HistoriaController extends Controller
     public function create()
     {
         $pacientes = Paciente::all();
-        return view('historias.create', compact('pacientes'));
+        $medicos = medico::all();
+        return view('historias.create', compact('pacientes','medicos'));
     }
 
     /**
@@ -80,6 +85,7 @@ class HistoriaController extends Controller
         $historia->diagnostico = $request->diagnostico;
         $historia->plan_terapeutico = $request->plan_terapeutico;
         $historia->id_paciente = $request->id_paciente;
+        $historia->id_medico = $request->id_medico;
         $historia->id_antep = $antep->id;
         $historia->id_antenp = $antenp->id;
         $historia->save();
@@ -101,12 +107,12 @@ class HistoriaController extends Controller
             $doc->id_historia = $historia->id;
             $doc->save();
 
-           // return Storage::disk('s3')->url($doc->url); para mostrar
-
-       
-
-       
+           // return Storage::disk('s3')->url($doc->url); para mostrar 
         }
+        activity()->useLog('Historias')->log('Registró')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $historia->id;
+        $lastActivity->save();
 
         return redirect()->route('historias.index');
     }
@@ -126,6 +132,12 @@ class HistoriaController extends Controller
         $citas = Cita::all();
         $diags = Diagnostico::all();
         $documentos = Documento::all();
+
+        activity()->useLog('Historias')->log('Accedió')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $historia->id;
+        $lastActivity->save();
+
         return view('historias.show', compact('historia', 'antep', 'antenp', 'paciente', 'citas', 'diags', 'documentos'));
     }
 
@@ -157,7 +169,7 @@ class HistoriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $historia = HistoriaClinica::find($id)->first();
+        $historia = HistoriaClinica::find($id);
 
         $antenp = antecedenteNoPato::where('id', $historia->id_antenp)->first();
         $antenp->inmunizacion = $request->inmunizacion;
@@ -194,7 +206,10 @@ class HistoriaController extends Controller
         $historia->id_antenp = $antenp->id;
         $historia->save();
 
-
+        activity()->useLog('Historias')->log('Editó')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $historia->id;
+        $lastActivity->save();
 
         return redirect()->route('historias.index');
     }
@@ -208,6 +223,12 @@ class HistoriaController extends Controller
     public function destroy($id)
     {
         $historia = HistoriaClinica::find($id);
+
+        activity()->useLog('Historias')->log('Eliminó Historia')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $historia->id;
+        $lastActivity->save();
+
         $antenp = antecedenteNoPato::where('id', $historia->id_antenp);
         $antep = antecedentePato::where('id', $historia->id_antep);
         $historia->delete();
@@ -222,6 +243,10 @@ class HistoriaController extends Controller
     
         $doc = Documento::find($id);
         
+        activity()->useLog('Historias')->log('Eliminó Archivo')->subject();
+        $lastActivity=Activity::all()->last();
+        $lastActivity->subject_id= $doc->id;
+        $lastActivity->save();
         
         Storage::disk('s3')->delete($doc->url);
  

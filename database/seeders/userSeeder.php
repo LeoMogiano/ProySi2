@@ -20,6 +20,8 @@ class userSeeder extends Seeder
         $user->password=bcrypt('1234');//bcrypt encripta la contraseña 
         $user->save();//save con  parentesis
         $user->assignRole('Administrador');//asigna un roll al  usuario que guardamos
+
+        /*
         //CREAMOS UN CLIENTE
         $user=new User() ;
         $user->name='Paciente';
@@ -35,6 +37,6 @@ class userSeeder extends Seeder
         $user->save();//save con  parentesis
         $user->assignRole('Medico');//asigna un roll al  usuario que guardamos
 
-
+            */
     }
 }
